@@ -5,20 +5,24 @@ import 'package:http/http.dart' as http;
 import 'package:weather_app/model/weather_model.dart';
 
 class ApiHelper {
-  Future<WeatherDataModel?> getWeatherData() async {
-    String link =
-        "https://api.openweathermap.org/data/2.5/weather?q=new york&appid=0a437de7c8d0dbc045e9a27093a3abcf";
+  final String apiKey = "0a437de7c8d0dbc045e9a27093a3abcf";
+  final String baseUrl = "https://api.openweathermap.org/data/2.5/weather";
 
-    http.Response response = await http.get(Uri.parse(link));
+  Future<WeatherModel?> getWeatherData({required String city}) async {
+    String url = "$baseUrl?q=$city&appid=$apiKey";
 
-    if (response.statusCode == 200) {
-      var json = jsonDecode(response.body);
+    try {
+      http.Response response = await http.get(Uri.parse(url));
 
-      WeatherDataModel models = WeatherDataModel.mapToModel(json);
-
-      log('$json');
-      print('$models');
-      return models;
+      if (response.statusCode == 200) {
+        var json = jsonDecode(response.body);
+        WeatherModel model = WeatherModel.mapToModel(json);
+        return model;
+      } else {
+        log('Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      log('Exception: $e');
     }
     return null;
   }

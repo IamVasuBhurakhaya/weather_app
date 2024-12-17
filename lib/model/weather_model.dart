@@ -1,31 +1,31 @@
-class WeatherDataModel {
+class WeatherModel {
   int? visibility, timezone;
-  String? name;
-  List<WeatherListModel>? weathersListModel = [];
+  String? name, cod;
+  List<WeatherListModel>? weathersList = [];
   MainModel? mainModels;
   WindModel? windModel;
   SysModel? sysModel;
 
-  WeatherDataModel({
+  WeatherModel({
     this.visibility,
     this.timezone,
     this.name,
-    this.weathersListModel,
+    this.weathersList,
     this.mainModels,
     this.windModel,
     this.sysModel,
   });
 
-  factory WeatherDataModel.mapToModel(Map m1) {
+  factory WeatherModel.mapToModel(Map m1) {
     List weather = m1['weather'];
-    return WeatherDataModel(
+    return WeatherModel(
       visibility: m1['visibility'],
       name: m1['name'],
       sysModel: SysModel.mapToModel(m1['sys']),
       mainModels: MainModel.mapToModel(m1['main']),
       timezone: m1['timezone'],
       windModel: WindModel.mapToModel(m1['wind']),
-      weathersListModel: weather
+      weathersList: weather
           .map(
             (e) => WeatherListModel.mapToModel(e),
           )
