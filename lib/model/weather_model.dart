@@ -35,12 +35,13 @@ class WeatherModel {
 }
 
 class WeatherListModel {
-  String? main, description;
+  String? main, description, icon;
 
-  WeatherListModel({this.main, this.description});
+  WeatherListModel({this.main, this.description, this.icon});
 
   factory WeatherListModel.mapToModel(Map m1) {
-    return WeatherListModel(main: m1['main'], description: m1['description']);
+    return WeatherListModel(
+        main: m1['main'], description: m1['description'], icon: m1['icon']);
   }
 }
 
