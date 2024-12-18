@@ -4,9 +4,9 @@ import 'package:weather_app/model/weather_model.dart';
 import 'package:weather_app/preference/shr_helper.dart';
 
 class HomeProvider with ChangeNotifier {
-  WeatherModel? weatherModel = WeatherModel();
+  WeatherModel? weatherModel;
   List<WeatherListModel> weatherList = [];
-  ShrHelper helper = ShrHelper();
+  final ShrHelper helper = ShrHelper();
 
   String cityName = "surat";
   List<String> bookmarkedCities = [];
@@ -16,11 +16,11 @@ class HomeProvider with ChangeNotifier {
   }
 
   Future<void> fetchWeatherData({required String city}) async {
-    ApiHelper apiHelper = ApiHelper();
+    final apiHelper = ApiHelper();
     weatherModel = await apiHelper.getWeatherData(city: city);
 
     if (weatherModel != null) {
-      weatherList = weatherModel!.weathersList!;
+      weatherList = weatherModel!.weathersList ?? [];
       notifyListeners();
     }
   }

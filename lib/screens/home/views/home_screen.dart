@@ -155,7 +155,19 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Consumer<HomeProvider>(
         builder: (context, provider, child) {
           if (provider.weatherModel == null) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+              child: TextField(
+                controller: searchController,
+                decoration: const InputDecoration(
+                  hintText: "Enter city name",
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.all(16.0),
+                ),
+                onSubmitted: (value) {
+                  searchCityWeather();
+                },
+              ),
+            );
           }
 
           String backgroundImage =

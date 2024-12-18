@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:http/http.dart' as http;
 import 'package:weather_app/model/weather_model.dart';
 
@@ -9,15 +8,14 @@ class ApiHelper {
   final String baseUrl = "https://api.openweathermap.org/data/2.5/weather";
 
   Future<WeatherModel?> getWeatherData({required String city}) async {
-    String url = "$baseUrl?q=$city&appid=$apiKey&units=metric";
+    final url = "$baseUrl?q=$city&appid=$apiKey&units=metric";
 
     try {
-      http.Response response = await http.get(Uri.parse(url));
+      final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
-        var json = jsonDecode(response.body);
-        WeatherModel model = WeatherModel.mapToModel(json);
-        return model;
+        final json = jsonDecode(response.body);
+        return WeatherModel.mapToModel(json);
       } else {
         log('Error: ${response.statusCode}');
       }
