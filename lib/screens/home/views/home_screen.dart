@@ -49,7 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Welcome message
                     Text(
                       'Welcome to WeatherApp!',
                       style: TextStyle(
@@ -67,7 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 30),
-
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40.0),
                       child: Text(
@@ -80,7 +78,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 40),
-
                     Container(
                       padding: const EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
